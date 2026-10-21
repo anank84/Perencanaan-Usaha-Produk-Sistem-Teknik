@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MPI Prakarya XI - Perencanaan Usaha Produk Sistem Teknik</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; }
+        .gradient-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        .card-glow { box-shadow: 0 10px 25px -5px rgba(59, 130, 246, 0.15), 0 8px 10px -6px rgba(59, 130, 246, 0.1); }
+        .custom-scrollbar::-webkit-scrollbar { width: 6px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #1e293b; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #3b82f6; border-radius: 4px; }
+    </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen flex flex-col justify-between custom-scrollbar selection:bg-blue-500 selection:text-white">
+
+    <!-- HEADER / NAVIGATION BAR -->
+    <header class="bg-slate-800/80 backdrop-blur-md border-b border-slate-700 sticky top-0 z-50 px-4 py-3 shadow-lg">
+        <div class="max-w-5xl mx-auto flex justify-between items-center">
+            <div class="flex items-center space-x-3">
+                <div class="bg-blue-600 p-2 rounded-xl text-white shadow-md shadow-blue-500/20">
+                    <i class="fa-solid me-0 fa-gears text-xl"></i>
+                </div>
+                <div>
+                    <h1 class="font-bold text-sm md:text-base text-blue-400 leading-tight">MPI PRAKARYA & KEWIRAUSAHAAN</h1>
+                    <p class="text-xs text-slate-400" id="header-school-info">SMA Negeri 4 Sorong | Kelas XI Fase F</p>
+                </div>
+            </div>
+
+            <!-- Header Action Controls -->
+            <div class="flex items-center space-x-2 md:space-x-4">
+                <button id="sound-toggle-btn" class="p-2 rounded-lg bg-slate-700 hover:bg-slate-600 text-slate-300 transition-all flex items-center gap-1 text-xs" title="Sound Effects">
+                    <i class="fa-solid fa-volume-high text-blue-400" id="sound-icon"></i>
+                    <span class="hidden sm:inline">Suara: ON</span>
+                </button>
+                <div class="hidden md:block text-right">
+                    <div id="session-user-badge" class="text-xs font-semibold bg-slate-700/60 px-3 py-1 rounded-full text-slate-300 border border-slate-600">
+                        <i class="fa-solid fa-user-circle text-blue-400 mr-1"></i> <span id="badge-user-name">Tamu</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Dynamic Navigation Progress Bar -->
+        <div class="w-full bg-slate-700 h-1.5 mt-3 rounded-full overflow-hidden">
+            <div id="app-progress-bar" class="bg-gradient-to-r from-blue-500 to-indigo-500 h-full w-0 transition-all duration-500"></div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT AREA CONTAINER -->
+    <main class="flex-grow max-w-5xl w-full mx-auto p-4 md:p-6 flex flex-col justify-center">
+
+        <!-- ==================== PAGE 1: OPENING / REGISTRATION ==================== -->
+        <section id="page-opening" class="space-y-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 md:p-10 card-glow text-center relative overflow-hidden">
+                <div class="absolute -top-10 -right-10 w-40 h-40 bg-blue-500/10 rounded-full blur-3xl"></div>
+                <div class="inline-block bg-blue-500/10 text-blue-400 px-4 py-1.5 rounded-full text-xs font-semibold mb-4 border border-blue-500/20">
+                    <i class="fa-solid fa-laptop-code mr-1"></i> Multimedia Pembelajaran Interaktif (MPI)
+                </div>
+                
+                <h2 class="text-2xl md:text-4xl font-extrabold text-white tracking-tight mb-3">
+                    Perencanaan Usaha Produk <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">Sistem Teknik</span>
+                </h2>
+                <p class="text-slate-400 text-sm md:text-base max-w-2xl mx-auto mb-6">
+                    Pelajari langkah sistematis identifikasi kebutuhan pasar, perancangan ide, analisis 6M, hingga pembuatan prototype produk sistem teknik.
+                </p>
+
+                <!-- Identity Summary Card -->
+                <div class="bg-slate-900/60 border border-slate-700/60 rounded-xl p-4 max-w-lg mx-auto mb-8 text-left text-xs md:text-sm grid grid-cols-2 gap-3">
+                    <div>
+                        <span class="text-slate-400 block">Mata Pelajaran:</span>
+                        <strong class="text-slate-200" id="conf-subject">Prakarya & Kewirausahaan</strong>
+                    </div>
+                    <div>
+                        <span class="text-slate-400 block">Kelas / Fase:</span>
+                        <strong class="text-slate-200" id="conf-class">Kelas XI / Fase F</strong>
+                    </div>
+                    <div>
+                        <span class="text-slate-400 block">Satuan Pendidikan:</span>
+                        <strong class="text-slate-200" id="conf-school">SMA Negeri 4 Sorong</strong>
+                    </div>
+                    <div>
+                        <span class="text-slate-400 block">Guru Pengampu:</span>
+                        <strong class="text-slate-200" id="conf-teacher">Anang Susilo Utomo, S.T.</strong>
+                    </div>
+                </div>
+
+                <!-- Registration Form -->
+                <div class="max-w-md mx-auto space-y-4 bg-slate-900/80 p-5 rounded-xl border border-slate-700 shadow-inner">
+                    <h3 class="text-sm font-semibold text-slate-300 text-left flex items-center">
+                        <i class="fa-solid fa-id-card text-blue-400 mr-2"></i> Masukkan Identitas Siswa
+                    </h3>
+                    <div>
+                        <input type="text" id="input-student-name" placeholder="Nama Lengkap Siswa *" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2.5 text-slate-100 placeholder-slate-500 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm transition-all">
+                    </div>
+                    <div>
+                        <select id="input-student-class" class="w-full bg-slate-800 border border-slate-600 rounded-lg px-4 py-2.5 text-slate-100 focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 text-sm transition-all">
+                            <option value="">-- Pilih Rombongan Belajar --</option>
+                            <option value="XI IPA 1">XI IPA 1</option>
+                            <option value="XI IPA 2">XI IPA 2</option>
+                            <option value="XI IPA 3">XI IPA 3</option>
+                            <option value="XI IPS 1">XI IPS 1</option>
+                            <option value="XI IPS 2">XI IPS 2</option>
+                        </select>
+                    </div>
+
+                    <button id="btn-start-learning" onclick="app.startLearningSession()" class="w-full bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-bold py-3 px-6 rounded-lg shadow-lg shadow-blue-500/25 transition-all flex items-center justify-center space-x-2 text-sm group">
+                        <span>MULAI BELAJAR NOW</span>
+                        <i class="fa-solid fa-arrow-right group-hover:translate-x-1 transition-transform"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PAGE 2: OBJECTIVES & GUIDE ==================== -->
+        <section id="page-objectives" class="hidden space-y-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 md:p-8 card-glow">
+                <div class="flex items-center space-x-3 mb-6 border-b border-slate-700 pb-4">
+                    <div class="bg-indigo-600/20 text-indigo-400 p-3 rounded-xl border border-indigo-500/30">
+                        <i class="fa-solid fa-bullseye text-2xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl md:text-2xl font-bold text-white">Tujuan Pembelajaran & Indikator</h2>
+                        <p class="text-xs text-slate-400">Pahami target pencapaian pembelajaran sebelum mempelajari materi</p>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6 mb-6">
+                    <!-- Target Card -->
+                    <div class="bg-slate-900/60 p-5 rounded-xl border border-slate-700 space-y-3">
+                        <h3 class="font-semibold text-blue-400 text-sm flex items-center">
+                            <i class="fa-solid fa-graduation-cap mr-2"></i> Capaian & Tujuan Pembelajaran
+                        </h3>
+                        <p class="text-xs text-slate-300 leading-relaxed" id="conf-objective-desc">
+                            Mendesain dan membuat produk serta pengemasan produk rekayasa sistem teknik berdasarkan identifikasi kebutuhan sumber daya, teknologi, dan prosedur berkarya secara sistematis.
+                        </p>
+                    </div>
+
+                    <!-- Success Indicators -->
+                    <div class="bg-slate-900/60 p-5 rounded-xl border border-slate-700 space-y-3">
+                        <h3 class="font-semibold text-emerald-400 text-sm flex items-center">
+                            <i class="fa-solid fa-list-check mr-2"></i> Indikator Keberhasilan (IKTP)
+                        </h3>
+                        <ul class="text-xs text-slate-300 space-y-2 list-disc list-inside">
+                            <li>Menjelaskan konsep produk sistem teknik dan potensi pasar lokal.</li>
+                            <li>Menganalisis kebutuhan sumber daya usaha (Komponen 6M).</li>
+                            <li>Menyusun alur proses produksi dan perancangan pengemasan produk.</li>
+                            <li>Membuat analisis biaya dan kelayakan usaha sistem teknik.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Navigation Guidance -->
+                <div class="bg-blue-950/40 border border-blue-800/50 rounded-xl p-4 text-xs text-blue-200 flex items-start space-x-3 mb-6">
+                    <i class="fa-solid fa-circle-info text-blue-400 text-base mt-0.5"></i>
+                    <div>
+                        <strong>Petunjuk Navigasi:</strong> Gunakan tombol <em>"Berikutnya"</em> untuk membaca materi secara berurutan, selesaikan latihan interaktif di akhir materi, dan lengkapi formulir refleksi untuk mengirim laporan belajar Anda.
+                    </div>
+                </div>
+
+                <!-- Control Buttons -->
+                <div class="flex justify-between items-center pt-2">
+                    <button onclick="app.navigateTo('opening')" class="px-5 py-2.5 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg text-xs font-semibold transition-all">
+                        <i class="fa-solid fa-chevron-left mr-1.5"></i> Kembali
+                    </button>
+                    <button onclick="app.navigateTo('materi')" class="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold transition-all shadow-md shadow-blue-600/30">
+                        Lanjutkan ke Materi <i class="fa-solid fa-chevron-right ml-1.5"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PAGE 3: INTERACTIVE MATERIAL ==================== -->
+        <section id="page-materi" class="hidden space-y-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 md:p-8 card-glow">
+                
+                <!-- Slide Sub-header -->
+                <div class="flex flex-wrap justify-between items-center mb-6 border-b border-slate-700 pb-4 gap-2">
+                    <div class="flex items-center space-x-2">
+                        <span id="materi-step-indicator" class="bg-blue-600/30 text-blue-400 border border-blue-500/30 text-xs px-2.5 py-1 rounded-md font-bold">
+                            Modul 1 / 3
+                        </span>
+                        <h2 id="materi-title" class="text-base md:text-lg font-bold text-white">Konsep & Identifikasi Pasar</h2>
+                    </div>
+                    <!-- Slide Indicators -->
+                    <div class="flex space-x-1.5" id="materi-dots">
+                        <!-- Rendered by JS -->
+                    </div>
+                </div>
+
+                <!-- Dynamic Slide Content Area -->
+                <div id="materi-content-body" class="min-h-[280px] bg-slate-900/50 border border-slate-700/80 rounded-xl p-5 md:p-6 mb-6">
+                    <!-- Interactive Slide HTML Content Injected via JS -->
+                </div>
+
+                <!-- Slide Control Buttons -->
+                <div class="flex justify-between items-center">
+                    <button id="btn-prev-materi" onclick="app.prevMateri()" class="px-5 py-2.5 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg text-xs font-semibold transition-all flex items-center">
+                        <i class="fa-solid fa-arrow-left mr-2"></i> Sebelum
+                    </button>
+                    <button id="btn-next-materi" onclick="app.nextMateri()" class="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold transition-all flex items-center shadow-md shadow-blue-600/30">
+                        Berikutnya <i class="fa-solid fa-arrow-right ml-2"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ==================== PAGE 4: INTERACTIVE QUIZ / LATIHAN ==================== -->
+        <section id="page-latihan" class="hidden space-y-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 md:p-8 card-glow">
+                
+                <!-- Quiz Header -->
+                <div class="flex justify-between items-center mb-6 border-b border-slate-700 pb-4">
+                    <div>
+                        <h2 class="text-lg md:text-xl font-bold text-white">Latihan Pemahaman Formatif</h2>
+                        <p class="text-xs text-slate-400">Jawab pertanyaan untuk menguji pemahaman materi Anda</p>
+                    </div>
+                    <div id="quiz-score-badge" class="hidden bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 font-bold px-3 py-1 rounded-lg text-xs">
+                        Skor: <span id="quiz-score-val">0</span>/100
+                    </div>
+                </div>
+
+                <!-- Question View Box -->
+                <div id="quiz-active-box" class="space-y-6">
+                    <div class="flex justify-between items-center text-xs text-slate-400">
+                        <span>Soal No. <strong id="quiz-current-num" class="text-blue-400">1</strong> dari <span id="quiz-total-num">5</span></span>
+                        <span id="quiz-timer" class="font-mono bg-slate-900 px-2 py-1 rounded text-slate-300">Sesi Kuis Aktif</span>
+                    </div>
+
+                    <!-- Question Prompt -->
+                    <div class="bg-slate-900/70 border border-slate-700 rounded-xl p-5 text-sm md:text-base font-medium text-slate-200 leading-relaxed" id="quiz-question-text">
+                        <!-- Question text here -->
+                    </div>
+
+                    <!-- Option Choice Buttons -->
+                    <div id="quiz-options-container" class="grid grid-cols-1 gap-3">
+                        <!-- Options injected via JS -->
+                    </div>
+
+                    <!-- Feedback Box -->
+                    <div id="quiz-feedback-box" class="hidden rounded-xl p-4 text-xs md:text-sm border transition-all">
+                        <!-- Feedback content -->
+                    </div>
+
+                    <!-- Action Controls -->
+                    <div class="flex justify-end space-x-3 pt-2">
+                        <button id="btn-submit-quiz-ans" onclick="app.submitAnswer()" class="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold transition-all">
+                            Periksa Jawaban
+                        </button>
+                        <button id="btn-next-quiz-q" onclick="app.nextQuestion()" class="hidden px-6 py-2.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg text-xs font-semibold transition-all">
+                            Soal Selanjutnya <i class="fa-solid fa-arrow-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Quiz Completion Summary Box -->
+                <div id="quiz-result-box" class="hidden text-center py-8 space-y-6">
+                    <div class="w-20 h-20 bg-emerald-500/20 border-2 border-emerald-500 text-emerald-400 rounded-full flex items-center justify-center mx-auto text-3xl">
+                        <i class="fa-solid fa-award"></i>
+                    </div>
+                    <div>
+                        <h3 class="text-2xl font-bold text-white">Latihan Selesai!</h3>
+                        <p class="text-xs text-slate-400 mt-1">Hasil latihan telah dihitung secara otomatis oleh sistem</p>
+                    </div>
+
+                    <div class="max-w-sm mx-auto bg-slate-900/80 border border-slate-700 rounded-xl p-4 grid grid-cols-3 gap-2 text-center">
+                        <div>
+                            <span class="text-xs text-slate-400 block">Benar</span>
+                            <strong id="summary-correct" class="text-emerald-400 text-lg">0</strong>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-400 block">Salah</span>
+                            <strong id="summary-wrong" class="text-rose-400 text-lg">0</strong>
+                        </div>
+                        <div>
+                            <span class="text-xs text-slate-400 block">Nilai Akhir</span>
+                            <strong id="summary-score" class="text-blue-400 text-lg">0</strong>
+                        </div>
+                    </div>
+
+                    <!-- Cloud Submission Banner -->
+                    <div id="quiz-sync-status" class="bg-slate-900 border border-slate-700 text-xs p-3 rounded-lg max-w-sm mx-auto text-slate-400">
+                        <i class="fa-solid fa-spinner fa-spin mr-1"></i> Menyimpan hasil ke database...
+                    </div>
+
+                    <div class="flex justify-center space-x-4 pt-2">
+                        <button onclick="app.resetQuiz()" class="px-5 py-2.5 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg text-xs font-semibold transition-all">
+                            <i class="fa-solid fa-rotate-right mr-1"></i> Ulangi Latihan
+                        </button>
+                        <button onclick="app.navigateTo('refleksi')" class="px-6 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold transition-all shadow-md shadow-blue-600/30">
+                            Lanjut ke Refleksi <i class="fa-solid fa-chevron-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ==================== PAGE 5: REFLECTION ==================== -->
+        <section id="page-refleksi" class="hidden space-y-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-6 md:p-8 card-glow">
+                <div class="flex items-center space-x-3 mb-6 border-b border-slate-700 pb-4">
+                    <div class="bg-amber-600/20 text-amber-400 p-3 rounded-xl border border-amber-500/30">
+                        <i class="fa-solid fa-brain text-2xl"></i>
+                    </div>
+                    <div>
+                        <h2 class="text-xl font-bold text-white">Refleksi Belajar Siswa</h2>
+                        <p class="text-xs text-slate-400">Sampaikan umpan balik dan pemahaman Anda terhadap kegiatan pembelajaran</p>
+                    </div>
+                </div>
+
+                <form id="form-reflection" onsubmit="app.submitReflection(event)" class="space-y-5">
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-2">1. Seberapa baik Anda memahami materi hari ini?</label>
+                        <select id="refl-understanding" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500">
+                            <option value="">-- Pilih Tingkat Pemahaman --</option>
+                            <option value="Sangat Paham">Sangat Paham - Menguasai seluruh konsep</option>
+                            <option value="Cukup Paham">Cukup Paham - Memahami sebagian besar materi</option>
+                            <option value="Kurang Paham">Kurang Paham - Perlu penjelasan ulang beberapa bagian</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-2">2. Apakah bagian materi yang menurut Anda paling sulit?</label>
+                        <input type="text" id="refl-difficulty" placeholder="Contoh: Menghitung biaya operasional / Komponen 6M" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-2">3. Bagian aktivitas apa yang paling Anda sukai?</label>
+                        <input type="text" id="refl-favorite" placeholder="Contoh: Mengelompokkan komponen sumber daya / Kuis" required class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-2">4. Tingkat keyakinan Anda dalam menerapkan materi ini:</label>
+                        <div class="grid grid-cols-4 gap-2 text-center">
+                            <label class="bg-slate-900 border border-slate-700 p-2.5 rounded-lg text-xs cursor-pointer hover:border-blue-500 flex flex-col items-center gap-1">
+                                <input type="radio" name="refl-confidence" value="Rendah" class="text-blue-600">
+                                <span>Rendah</span>
+                            </label>
+                            <label class="bg-slate-900 border border-slate-700 p-2.5 rounded-lg text-xs cursor-pointer hover:border-blue-500 flex flex-col items-center gap-1">
+                                <input type="radio" name="refl-confidence" value="Sedang" class="text-blue-600">
+                                <span>Sedang</span>
+                            </label>
+                            <label class="bg-slate-900 border border-slate-700 p-2.5 rounded-lg text-xs cursor-pointer hover:border-blue-500 flex flex-col items-center gap-1">
+                                <input type="radio" name="refl-confidence" value="Tinggi" class="text-blue-600" checked>
+                                <span>Tinggi</span>
+                            </label>
+                            <label class="bg-slate-900 border border-slate-700 p-2.5 rounded-lg text-xs cursor-pointer hover:border-blue-500 flex flex-col items-center gap-1">
+                                <input type="radio" name="refl-confidence" value="Sangat Tinggi" class="text-blue-600">
+                                <span>Sangat Tinggi</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-semibold text-slate-300 mb-2">5. Catatan / Pertanyaan Tambahan untuk Guru:</label>
+                        <textarea id="refl-notes" rows="3" placeholder="Tulis masukan atau hal yang ingin ditanyakan lebih lanjut..." class="w-full bg-slate-900 border border-slate-700 rounded-lg p-3 text-xs text-slate-200 focus:outline-none focus:border-blue-500"></textarea>
+                    </div>
+
+                    <!-- Reflection Submission Button -->
+                    <div class="pt-2 flex justify-end">
+                        <button type="submit" id="btn-submit-refleksi" class="px-6 py-3 bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-bold rounded-lg text-xs shadow-lg shadow-emerald-600/20 transition-all flex items-center space-x-2">
+                            <i class="fa-solid fa-paper-plane"></i>
+                            <span>SIMPAN & KIRIM REFLEKSI</span>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </section>
+
+        <!-- ==================== PAGE 6: COMPLETION / FINISH ==================== -->
+        <section id="page-selesai" class="hidden space-y-6">
+            <div class="bg-slate-800 border border-slate-700 rounded-2xl p-8 card-glow text-center space-y-6">
+                <div class="w-24 h-24 bg-blue-500/20 border-2 border-blue-500 text-blue-400 rounded-full flex items-center justify-center mx-auto text-4xl shadow-xl shadow-blue-500/10">
+                    <i class="fa-solid fa-circle-check"></i>
+                </div>
+
+                <div class="space-y-2">
+                    <h2 class="text-2xl md:text-3xl font-extrabold text-white">Sesi Pembelajaran Selesai!</h2>
+                    <p class="text-slate-400 text-xs md:text-sm max-w-md mx-auto">
+                        Terima kasih, <strong text-slate-200 id="finish-student-name">Siswa</strong>! Seluruh data partisipasi, skor kuis, dan refleksi Anda telah tersimpan secara resmi.
+                    </p>
+                </div>
+
+                <div class="bg-slate-900/80 border border-slate-700 rounded-xl p-4 max-w-md mx-auto text-left text-xs space-y-2">
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">ID Sesi Pembelajaran:</span>
+                        <span id="finish-session-id" class="font-mono text-blue-400">SESSION-0000</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-400">Status Penyimpanan:</span>
+                        <span id="finish-cloud-status" class="text-emerald-400 font-semibold"><i class="fa-solid fa-check-circle mr-1"></i> Tersimpan di Database</span>
+                    </div>
+                </div>
+
+                <div class="pt-4 flex justify-center space-x-3">
+                    <button onclick="app.navigateTo('materi')" class="px-5 py-2.5 bg-slate-700 hover:bg-slate-600 text-slate-200 rounded-lg text-xs font-semibold transition-all">
+                        <i class="fa-solid fa-book-open mr-1.5"></i> Ulangi Baca Materi
+                    </button>
+                    <button onclick="location.reload()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold transition-all">
+                        <i class="fa-solid fa-arrow-rotate-left mr-1.5"></i> Sesi Baru
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-800/60 border-t border-slate-700/60 py-3 px-4 text-center text-xs text-slate-500">
+        <div class="max-w-5xl mx-auto flex flex-col sm:flex-row justify-between items-center gap-2">
+            <span>&copy; 2026 SMA Negeri 4 Sorong — Media Pembelajaran Digital Prakarya</span>
+            <span class="font-mono text-[10px] bg-slate-900 px-2 py-0.5 rounded border border-slate-700">GAS Endpoint: Enabled</span>
+        </div>
+    </footer>
+
+    <!-- INTERACTIVE JAVASCRIPT APP ENGINE -->
+    <script>
+        /**
+         * MPI Application Engine Config & State
+         */
+        const CONFIG = {
+         // Tempelkan URL Web App dari Google Apps Script yang baru disalin di bawah ini:
+           GAS_ENDPOINT_URL: "https://script.google.com/macros/s/AKfycbxNx2lxy-0Wokvv79YeIgVlmHAo28SGF1i-Dz1OL5AzhOCgPau2kqsMN9TjdOO9XncnSQ/exec",
+           SUBJECT: "Prakarya & Kewirausahaan (Sistem Teknik)",
+           CLASS: "Kelas XI / Fase F",
+           SCHOOL: "SMA Negeri 4 Sorong",
+            TEACHER: "Anang Susilo Utomo, S.T."
+        };
+
+        // Audio Effects Synthesizer using Web Audio API
+        const SoundFX = {
+            enabled: true,
+            ctx: null,
+            init() {
+                if (!this.ctx) {
+                    this.ctx = new (window.AudioContext || window.webkitAudioContext)();
+                }
+            },
+            playClick() {
+                if (!this.enabled) return;
+                this.init();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(600, this.ctx.currentTime);
+                gain.gain.setValueAtTime(0.05, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.08);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.08);
+            },
+            playCorrect() {
+                if (!this.enabled) return;
+                this.init();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'triangle';
+                osc.frequency.setValueAtTime(523.25, this.ctx.currentTime); // C5
+                osc.frequency.setValueAtTime(659.25, this.ctx.currentTime + 0.1); // E5
+                gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.3);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.3);
+            },
+            playWrong() {
+                if (!this.enabled) return;
+                this.init();
+                const osc = this.ctx.createOscillator();
+                const gain = this.ctx.createGain();
+                osc.type = 'sawtooth';
+                osc.frequency.setValueAtTime(220, this.ctx.currentTime);
+                osc.frequency.setValueAtTime(180, this.ctx.currentTime + 0.1);
+                gain.gain.setValueAtTime(0.1, this.ctx.currentTime);
+                gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.25);
+                osc.connect(gain);
+                gain.connect(this.ctx.destination);
+                osc.start();
+                osc.stop(this.ctx.currentTime + 0.25);
+            }
+        };
+
+        // Materi Content Database
+        const MATERI_DATA = [
+            {
+                title: "1. Konsep & Identifikasi Produk Sistem Teknik",
+                content: `
+                    <p class="text-xs md:text-sm text-slate-300 mb-4 leading-relaxed">
+                        <strong>Produk Sistem Teknik</strong> adalah perpaduan antara komponen mekanik, elektronik, dan sistem kontrol yang dirancang untuk mempermudah pekerjaan manusia secara otomatis atau semi-otomatis.
+                    </p>
+                    <div class="bg-slate-800 border border-slate-700 p-4 rounded-xl mb-4">
+                        <h4 class="font-bold text-blue-400 text-xs mb-2"><i class="fa-solid fa-lightbulb mr-1"></i> Contoh Aplikasi di Industri & Rumah Tangga:</h4>
+                        <ul class="list-disc list-inside text-xs text-slate-300 space-y-1">
+                            <li>Alat Pengering Hasil Pertanian Otomatis berbasis Termostat.</li>
+                            <li>Sistem Penyiram Tanaman Otomatis berbasis Sensor Kelembaban Tanah.</li>
+                            <li>Alat Pemilah Sampah Organik & Anorganik Otomatis.</li>
+                        </ul>
+                    </div>
+                    <p class="text-xs text-slate-400">
+                        Perencanaan usaha diawali dengan <em>identifikasi kebutuhan masyarakat lokal</em> dan ketersediaan komponen teknis di daerah.
+                    </p>
+                `
+            },
+            {
+                title: "2. Analisis Sumber Daya Usaha (Komponen 6M)",
+                content: `
+                    <p class="text-xs md:text-sm text-slate-300 mb-3">
+                        Perencanaan produksi sistem teknik memerlukan pengelolaan 6 sumber daya utama (6M):
+                    </p>
+                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2 text-xs">
+                        <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700"><strong class="text-blue-400">1. Man (Manusia):</strong> Tenaga ahli & perancang sistem.</div>
+                        <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700"><strong class="text-blue-400">2. Money (Uang):</strong> Modal modal kerja & operasional.</div>
+                        <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700"><strong class="text-blue-400">3. Material (Bahan):</strong> Sensor, mikrokontroler, rangka.</div>
+                        <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700"><strong class="text-blue-400">4. Machine (Mesin):</strong> Solder, mesin 3D printer, perkakas.</div>
+                        <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700"><strong class="text-blue-400">5. Method (Metode):</strong> SOP perakitan & uji fungsi.</div>
+                        <div class="bg-slate-800 p-2.5 rounded-lg border border-slate-700"><strong class="text-blue-400">6. Market (Pasar):</strong> Target konsumen/industri pengguna.</div>
+                    </div>
+                `
+            },
+            {
+                title: "3. Prosedur Perancangan & Pengemasan Produk",
+                content: `
+                    <div class="space-y-3 text-xs md:text-sm text-slate-300">
+                        <div class="p-3 bg-slate-800 rounded-lg border border-slate-700">
+                            <strong class="text-emerald-400 block mb-1">Tahap 1: Ideation & Sketching</strong>
+                            Membuat skema rangkaian listrik dan rancangan visual 3D casing/rangka.
+                        </div>
+                        <div class="p-3 bg-slate-800 rounded-lg border border-slate-700">
+                            <strong class="text-emerald-400 block mb-1">Tahap 2: Prototyping & Testing</strong>
+                            Membuat sampel fungsi minimal (MVP) dan menguji keandalan komponen elektronik.
+                        </div>
+                        <div class="p-3 bg-slate-800 rounded-lg border border-slate-700">
+                            <strong class="text-emerald-400 block mb-1">Tahap 3: Pengemasan (Packaging)</strong>
+                            Pengemasan harus melindungi komponen elektronik dari kelembaban/benturan serta memuat petunjuk penggunaan (manual book).
+                        </div>
+                    </div>
+                `
+            }
+        ];
+
+        // Interactive Quiz Data
+        const QUIZ_DATA = [
+            {
+                q: "Elemen utama yang membedakan produk sistem teknik dengan produk kerajinan konvensional adalah...",
+                options: [
+                    "Penggunaan bahan alam tanpa olahan",
+                    "Integrasi komponen mekanik, elektronik, dan sistem kontrol",
+                    "Dibuat sepenuhnya secara manual tanpa alat",
+                    "Tidak memerlukan tahap pengemasan"
+                ],
+                answer: 1,
+                explain: "Produk sistem teknik menggabungkan mekanik, elektronik, dan sistem kontrol untuk otomasi kerja."
+            },
+            {
+                q: "Komponen sumber daya 'Material' dalam pembuatan sistem penyiram tanaman otomatis meliputi...",
+                options: [
+                    "Solder dan obeng set",
+                    "Sensor kelembaban, mikrokontroler, dan pompa air",
+                    "Dokumen SOP perakitan",
+                    "Target pembeli di sektor pertanian"
+                ],
+                answer: 1,
+                explain: "Sensor, mikrokontroler, dan pompa merupakan bahan fisik (material) yang dirangkai menjadi produk."
+            },
+            {
+                q: "Tujuan utama pengemasan (packaging) pada produk rekayasa sistem teknik adalah...",
+                options: [
+                    "Menambah berat produk agar terasa kokoh",
+                    "Melindungi rangkaian sensitif dari korosi/benturan & memberikan petunjuk pakai",
+                    "Menyembunyikan skema rangkaian agar tidak ditiru",
+                    "Mengurangi biaya produksi secara drastis"
+                ],
+                answer: 1,
+                explain: "Kemasan bertugas melindungi rangkaian komponen elektronik dari paparan lingkungan serta memberikan edukasi penggunaan."
+            },
+            {
+                q: "Dalam konsep 6M kewirausahaan, penyusunan langkah uji fungsi (testing) termasuk dalam kriteria...",
+                options: [
+                    "Money",
+                    "Market",
+                    "Method",
+                    "Machine"
+                ],
+                answer: 2,
+                explain: "SOP dan tata cara pengujian termasuk dalam aspek Method (Metode/Prosedur Kerja)."
+            },
+            {
+                q: "Langkah pertama yang harus dilakukan sebelum mendesain produk sistem teknik adalah...",
+                options: [
+                    "Langsung membeli komponen harga mahal",
+                    "Menentukan harga jual produk",
+                    "Identifikasi masalah dan kebutuhan calon pengguna",
+                    "Membuat brosur promosi produk"
+                ],
+                answer: 2,
+                explain: "Perencanaan usaha senantiasa berawal dari identifikasi masalah dan analisis kebutuhan pasar."
+            }
+        ];
+
+        const app = {
+            state: {
+                sessionId: "",
+                studentName: "",
+                studentClass: "",
+                currentMateriIdx: 0,
+                quizCurrentIdx: 0,
+                quizUserAnswers: [],
+                quizScore: 0,
+                quizSubmitted: false,
+                reflectionSubmitted: false
+            },
+
+            init() {
+                // Generate unique session ID
+                this.state.sessionId = 'SES-' + Date.now().toString(36).toUpperCase() + '-' + Math.random().toString(36).substr(2, 4).toUpperCase();
+                
+                // Sound toggle button listener
+                document.getElementById('sound-toggle-btn').addEventListener('click', () => {
+                    SoundFX.enabled = !SoundFX.enabled;
+                    document.getElementById('sound-icon').className = SoundFX.enabled ? "fa-solid fa-volume-high text-blue-400" : "fa-solid fa-volume-xmark text-slate-500";
+                    document.getElementById('sound-toggle-btn').querySelector('span').innerText = SoundFX.enabled ? "Suara: ON" : "Suara: OFF";
+                });
+
+                this.renderMateri();
+                this.renderQuizQuestion();
+            },
+
+            navigateTo(pageId) {
+                SoundFX.playClick();
+                const pages = ['opening', 'objectives', 'materi', 'latihan', 'refleksi', 'selesai'];
+                pages.forEach(p => {
+                    const el = document.getElementById(`page-${p}`);
+                    if (el) el.classList.add('hidden');
+                });
+
+                const targetEl = document.getElementById(`page-${pageId}`);
+                if (targetEl) targetEl.classList.remove('hidden');
+
+                // Update Progress Bar
+                const pageIndex = pages.indexOf(pageId);
+                const progressPct = ((pageIndex) / (pages.length - 1)) * 100;
+                document.getElementById('app-progress-bar').style.width = `${progressPct}%`;
+
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            },
+
+            startLearningSession() {
+                const name = document.getElementById('input-student-name').value.trim();
+                const studentClass = document.getElementById('input-student-class').value;
+
+                if (!name || !studentClass) {
+                    alert("Mohon lengkapi Nama Lengkap dan Rombongan Belajar Anda terlebih dahulu.");
+                    return;
+                }
+
+                this.state.studentName = name;
+                this.state.studentClass = studentClass;
+
+                // Update UI badges
+                document.getElementById('badge-user-name').innerText = name;
+                document.getElementById('finish-student-name').innerText = name;
+                document.getElementById('finish-session-id').innerText = this.state.sessionId;
+
+                // Send initial login log to GAS
+                this.sendToSpreadsheet("DATA_SISWA", {
+                    sessionId: this.state.sessionId,
+                    timestamp: new Date().toISOString(),
+                    studentName: this.state.studentName,
+                    studentClass: this.state.studentClass,
+                    mediaTitle: "MPI Produk Sistem Teknik",
+                    materiTitle: CONFIG.SUBJECT
+                });
+
+                this.navigateTo('objectives');
+            },
+
+            renderMateri() {
+                const item = MATERI_DATA[this.state.currentMateriIdx];
+                document.getElementById('materi-title').innerText = item.title;
+                document.getElementById('materi-step-indicator').innerText = `Modul ${this.state.currentMateriIdx + 1} / ${MATERI_DATA.length}`;
+                document.getElementById('materi-content-body').innerHTML = item.content;
+
+                // Render indicator dots
+                const dotsContainer = document.getElementById('materi-dots');
+                dotsContainer.innerHTML = '';
+                MATERI_DATA.forEach((_, idx) => {
+                    const dot = document.createElement('div');
+                    dot.className = `w-2.5 h-2.5 rounded-full transition-all ${idx === this.state.currentMateriIdx ? 'bg-blue-500 w-5' : 'bg-slate-700'}`;
+                    dotsContainer.appendChild(dot);
+                });
+
+                // Prev/Next Button controls
+                document.getElementById('btn-prev-materi').style.visibility = this.state.currentMateriIdx === 0 ? 'hidden' : 'visible';
+            },
+
+            nextMateri() {
+                SoundFX.playClick();
+                if (this.state.currentMateriIdx < MATERI_DATA.length - 1) {
+                    this.state.currentMateriIdx++;
+                    this.renderMateri();
+                } else {
+                    this.navigateTo('latihan');
+                }
+            },
+
+            prevMateri() {
+                SoundFX.playClick();
+                if (this.state.currentMateriIdx > 0) {
+                    this.state.currentMateriIdx--;
+                    this.renderMateri();
+                }
+            },
+
+            renderQuizQuestion() {
+                const q = QUIZ_DATA[this.state.quizCurrentIdx];
+                document.getElementById('quiz-current-num').innerText = this.state.quizCurrentIdx + 1;
+                document.getElementById('quiz-total-num').innerText = QUIZ_DATA.length;
+                document.getElementById('quiz-question-text').innerText = q.q;
+
+                const optionsContainer = document.getElementById('quiz-options-container');
+                optionsContainer.innerHTML = '';
+
+                q.options.forEach((optText, optIdx) => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = `p-3.5 rounded-xl border text-left text-xs md:text-sm font-medium transition-all flex items-center justify-between ${
+                        this.state.quizUserAnswers[this.state.quizCurrentIdx] === optIdx
+                            ? 'bg-blue-600/20 border-blue-500 text-blue-300'
+                            : 'bg-slate-900/60 border-slate-700/80 text-slate-300 hover:bg-slate-800'
+                    }`;
+                    btn.onclick = () => this.selectQuizOption(optIdx);
+                    btn.innerHTML = `
+                        <span>${String.fromCharCode(65 + optIdx)}. ${optText}</span>
+                        <div class="w-4 h-4 rounded-full border border-slate-600 flex items-center justify-center text-[10px]">
+                            ${this.state.quizUserAnswers[this.state.quizCurrentIdx] === optIdx ? '<i class="fa-solid fa-circle text-blue-400"></i>' : ''}
+                        </div>
+                    `;
+                    optionsContainer.appendChild(btn);
+                });
+
+                // Hide feedback box when rendering new question
+                document.getElementById('quiz-feedback-box').className = 'hidden';
+                document.getElementById('btn-submit-quiz-ans').classList.remove('hidden');
+                document.getElementById('btn-next-quiz-q').classList.add('hidden');
+            },
+
+            selectQuizOption(optIdx) {
+                SoundFX.playClick();
+                this.state.quizUserAnswers[this.state.quizCurrentIdx] = optIdx;
+                this.renderQuizQuestion();
+            },
+
+            submitAnswer() {
+                const selected = this.state.quizUserAnswers[this.state.quizCurrentIdx];
+                if (selected === undefined) {
+                    alert("Pilihlah salah satu jawaban terlebih dahulu!");
+                    return;
+                }
+
+                const q = QUIZ_DATA[this.state.quizCurrentIdx];
+                const feedbackBox = document.getElementById('quiz-feedback-box');
+                feedbackBox.classList.remove('hidden');
+
+                if (selected === q.answer) {
+                    SoundFX.playCorrect();
+                    feedbackBox.className = "bg-emerald-950/40 border border-emerald-800 text-emerald-300 p-4 rounded-xl text-xs leading-relaxed";
+                    feedbackBox.innerHTML = `<i class="fa-solid fa-circle-check text-emerald-400 mr-1.5"></i> <strong>Jawaban Benar!</strong> ${q.explain}`;
+                } else {
+                    SoundFX.playWrong();
+                    feedbackBox.className = "bg-rose-950/40 border border-rose-800 text-rose-300 p-4 rounded-xl text-xs leading-relaxed";
+                    feedbackBox.innerHTML = `<i class="fa-solid fa-circle-xmark text-rose-400 mr-1.5"></i> <strong>Jawaban Kurang Tepat.</strong> ${q.explain}`;
+                }
+
+                document.getElementById('btn-submit-quiz-ans').classList.add('hidden');
+                document.getElementById('btn-next-quiz-q').classList.remove('hidden');
+            },
+
+            nextQuestion() {
+                SoundFX.playClick();
+                if (this.state.quizCurrentIdx < QUIZ_DATA.length - 1) {
+                    this.state.quizCurrentIdx++;
+                    this.renderQuizQuestion();
+                } else {
+                    this.finishQuiz();
+                }
+            },
+
+            finishQuiz() {
+                let correctCount = 0;
+                QUIZ_DATA.forEach((q, idx) => {
+                    if (this.state.quizUserAnswers[idx] === q.answer) {
+                        correctCount++;
+                    }
+                });
+
+                const wrongCount = QUIZ_DATA.length - correctCount;
+                // Formula: Skor = (Jumlah Benar / Jumlah Soal) * 100
+                const score = Math.round((correctCount / QUIZ_DATA.length) * 100);
+
+                this.state.quizScore = score;
+                this.state.quizSubmitted = true;
+
+                document.getElementById('summary-correct').innerText = correctCount;
+                document.getElementById('summary-wrong').innerText = wrongCount;
+                document.getElementById('summary-score').innerText = score;
+
+                document.getElementById('quiz-active-box').classList.add('hidden');
+                document.getElementById('quiz-result-box').classList.remove('hidden');
+
+                // Send quiz result to GAS
+                this.sendToSpreadsheet("HASIL_LATIHAN", {
+                    sessionId: this.state.sessionId,
+                    timestamp: new Date().toISOString(),
+                    studentName: this.state.studentName,
+                    studentClass: this.state.studentClass,
+                    materiTitle: CONFIG.SUBJECT,
+                    totalQuestions: QUIZ_DATA.length,
+                    correctCount: correctCount,
+                    wrongCount: wrongCount,
+                    score: score,
+                    status: score >= 75 ? "TUNTAS" : "REMIDIAL"
+                });
+            },
+
+            resetQuiz() {
+                SoundFX.playClick();
+                this.state.quizCurrentIdx = 0;
+                this.state.quizUserAnswers = [];
+                this.state.quizSubmitted = false;
+
+                document.getElementById('quiz-result-box').classList.add('hidden');
+                document.getElementById('quiz-active-box').classList.remove('hidden');
+                this.renderQuizQuestion();
+            },
+
+            submitReflection(e) {
+                e.preventDefault();
+                SoundFX.playClick();
+
+                if (this.state.reflectionSubmitted) {
+                    alert("Refleksi Anda sudah tersimpan sebelumnya.");
+                    this.navigateTo('selesai');
+                    return;
+                }
+
+                const understanding = document.getElementById('refl-understanding').value;
+                const difficulty = document.getElementById('refl-difficulty').value.trim();
+                const favorite = document.getElementById('refl-favorite').value.trim();
+                const notes = document.getElementById('refl-notes').value.trim();
+                const confidenceEl = document.querySelector('input[name="refl-confidence"]:checked');
+                const confidence = confidenceEl ? confidenceEl.value : "Sedang";
+
+                const btn = document.getElementById('btn-submit-refleksi');
+                btn.disabled = true;
+                btn.innerHTML = `<i class="fa-solid fa-spinner fa-spin mr-1"></i> Mengirim Data...`;
+
+                this.sendToSpreadsheet("REFLEKSI", {
+                    sessionId: this.state.sessionId,
+                    timestamp: new Date().toISOString(),
+                    studentName: this.state.studentName,
+                    studentClass: this.state.studentClass,
+                    understanding: understanding,
+                    difficulty: difficulty,
+                    favorite: favorite,
+                    confidence: confidence,
+                    notes: notes
+                });
+
+                this.state.reflectionSubmitted = true;
+                setTimeout(() => {
+                    this.navigateTo('selesai');
+                }, 800);
+            },
+
+            /**
+             * Asynchronous Backend Data Sender to Google Apps Script
+             */
+            sendToSpreadsheet(sheetType, payload) {
+                const statusBox = document.getElementById('quiz-sync-status');
+                
+                // Construct URL Payload using standard no-cors POST or GET compatible query
+                fetch(CONFIG.GAS_ENDPOINT_URL, {
+                    method: 'POST',
+                    mode: 'no-cors', // Compatible with Apps Script CORS restrictions
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        action: sheetType,
+                        data: payload
+                    })
+                }).then(() => {
+                    if (statusBox) {
+                        statusBox.className = "bg-emerald-950/60 border border-emerald-700 text-xs p-3 rounded-lg max-w-sm mx-auto text-emerald-300";
+                        statusBox.innerHTML = `<i class="fa-solid fa-circle-check mr-1"></i> Data ${sheetType} berhasil terkirim ke Server Spreadsheet.`;
+                    }
+                }).catch(err => {
+                    console.warn("GAS Sync Note:", err);
+                    if (statusBox) {
+                        statusBox.className = "bg-amber-950/60 border border-amber-700 text-xs p-3 rounded-lg max-w-sm mx-auto text-amber-300";
+                        statusBox.innerHTML = `<i class="fa-solid fa-triangle-exclamation mr-1"></i> Mode Offline / Log tersimpan lokal.`;
+                    }
+                });
+            }
+        };
+
+        // Window Onload Initialization Trigger
+        window.onload = function() {
+            app.init();
+        };
+    </script>
+</body>
+</html>
